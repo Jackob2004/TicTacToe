@@ -66,6 +66,7 @@ public class TicTacToe { // class for game logic
                 return;
             }
         }
+        draw();
     }
 
     public void endGame(int i,String winner){ // ending game
@@ -107,6 +108,20 @@ public class TicTacToe { // class for game logic
 
             turn = true;
             gameOn = true;
+
+            frame.getLabel().setText("X turn");
         } else if (a==JOptionPane.NO_OPTION) frame.getFrame().dispatchEvent(new WindowEvent(frame.getFrame(),WindowEvent.WINDOW_CLOSING));
+    }
+
+
+    private void draw() { // if no one won
+        int check = 0;
+        for (JButton buttons : frame.getButtons()){
+            if (!buttons.getText().isBlank()) check++;
+        }
+        if(check==9){
+            frame.getLabel().setText("Draw");
+            playAgain();
+        }
     }
 }
