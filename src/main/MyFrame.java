@@ -42,6 +42,7 @@ public class MyFrame { // displaying game layout
                 button.setActionCommand(String.valueOf(index));
                 button.setBounds(i*200,40+j*200,200,200);
                 button.setFont(new Font("Arial", Font.PLAIN, 100));
+                button.setBackground(Color.white);
                 button.addActionListener(buttonListener);
 
                 frame.add(button);
@@ -66,6 +67,8 @@ public class MyFrame { // displaying game layout
     public JLabel getLabel() { return label; }
 
     public JButton[] getButtons() { return buttons; }
+
+    public JFrame getFrame() { return frame; }
 
     public TicTacToe getTicTacToe() { return ticTacToe; }
 }

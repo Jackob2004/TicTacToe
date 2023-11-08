@@ -2,6 +2,8 @@ package main;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowEvent;
+import java.util.Arrays;
 
 public class TicTacToe { // class for game logic
     private MyFrame frame;
@@ -12,7 +14,7 @@ public class TicTacToe { // class for game logic
 
     private boolean gameOn = true;
 
-    public TicTacToe( MyFrame frame){
+    public TicTacToe(MyFrame frame){
         this.frame = frame;
         gameBoard = new String[3][3];
     }
@@ -80,6 +82,7 @@ public class TicTacToe { // class for game logic
             case 6 -> setButtonBackground(0, 9, 4);
             case 7 -> setButtonBackground(2, 7, 2);
         }
+        playAgain();
     }
 
     public void setButtonBackground(int start, int until, int add){ // changing buttons color
@@ -87,5 +90,23 @@ public class TicTacToe { // class for game logic
             JButton button = frame.getButtons()[j];
             button.setBackground(Color.green);
         }
+    }
+
+    private void playAgain() { // showing window with 3 options, so you can clear the board and play again, end game or do nothing
+        int a = JOptionPane.showConfirmDialog(frame.getFrame(),"Wanna play again ?");
+
+        if(a==JOptionPane.YES_OPTION){
+            for (int i = 0; i < frame.getButtons().length; i++) {
+                JButton button = frame.getButtons()[i];
+                button.setBackground(Color.white);
+                button.setForeground(Color.white);
+                button.setText("");
+            }
+
+            for (String[] strings : gameBoard) Arrays.fill(strings, "k"); // looping through whole multidimensional array
+
+            turn = true;
+            gameOn = true;
+        } else if (a==JOptionPane.NO_OPTION) frame.getFrame().dispatchEvent(new WindowEvent(frame.getFrame(),WindowEvent.WINDOW_CLOSING));
     }
 }
